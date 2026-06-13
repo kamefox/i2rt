@@ -1,0 +1,53 @@
+<mujoco model="big_yamA">
+  <compiler angle="radian" meshdir="assets"/>
+  <size njmax="500" nconmax="100"/>
+
+  <asset>
+    <mesh name="base" file="base.stl"/>
+    <mesh name="link1" file="link1.stl"/>
+    <mesh name="link2" file="link2.stl"/>
+    <mesh name="link3" file="link3.stl"/>
+    <mesh name="link4" file="link4.stl"/>
+    <mesh name="link5" file="link5.stl"/>
+  </asset>
+
+  <worldbody>
+    <geom pos="0.00250966 0.0534862 -1.00632" quat="0.7071 0.00269856 -0.00269855 0.707103" type="mesh" rgba="1 0.6 0 1" mesh="base"/>
+    <body name="link1" pos="0 0 0.0856176" quat="5.94157e-08 0.0447813 -0.998997 -1.32546e-06">
+      <inertial pos="-9.56697e-05 -0.00522779 -0.0216352" quat="0.598487 0.376102 0.589367 0.391162" mass="0.401154" diaginertia="0.000713913 0.000523966 0.000309117"/>
+      <joint name="joint1" pos="0 0 0" axis="0 0 1" range="-1.39394 4.27838" actuatorfrcrange="-10 10"/>
+      <geom pos="0.0534862 0.00250966 1.09193" quat="1.32679e-06 0.999993 5.06349e-09 -0.00381633" type="mesh" rgba="0.862745 0.937255 0.929412 1" mesh="link1"/>
+      <body name="link2" pos="0.03025 -0.0214683 -0.0568824" quat="9.38184e-07 -0.707105 -9.38187e-07 -0.707108">
+        <inertial pos="-0.000175493 0.172117 -0.0295276" quat="0.706672 0.707536 -0.00182922 0.00191623" mass="1.45435" diaginertia="0.030477 0.030444 0.000894217"/>
+        <joint name="joint2" pos="0 0 0" axis="0 0 1" range="0 3.14159" actuatorfrcrange="-10 10"/>
+        <geom pos="-1.14882 0.0239779 0.0229862" quat="9.41761e-07 0.709801 -9.34597e-07 0.704402" type="mesh" rgba="0.611765 0.658824 0.670588 1" mesh="link2"/>
+        <body name="link3" pos="7.57417e-05 0.3887 0.00463563" quat="0.00272002 0.701517 -0.712643 -0.00267757">
+          <inertial pos="0.194318 0.0673381 0.0357453" quat="-0.0470084 0.707358 -0.00532498 0.70527" mass="1.21513" diaginertia="0.0197486 0.0196621 0.00104913"/>
+          <joint name="joint3" pos="0 0 0" axis="0 0 1" range="-0.0157332 3.12586" actuatorfrcrange="-10 10"/>
+          <geom pos="0.364721 -1.149 0.079431" quat="0.499998 -0.5 -0.5 -0.500002" type="mesh" rgba="0.611765 0.658824 0.670588 1" mesh="link3"/>
+          <body name="link4" pos="0.373401 0.072 0.00105" quat="0.998452 0 0 -0.0556153">
+            <inertial pos="0.0573245 0.0536732 0.0330434" quat="0.634124 0.700572 -0.199997 -0.259011" mass="0.454939" diaginertia="0.000806296 0.000769631 0.000282067"/>
+            <joint name="joint4" pos="0 0 0" axis="0 0 1" range="-1.45951 1.68208" actuatorfrcrange="-10 10"/>
+            <geom pos="-0.00868006 -1.221 0.078381" quat="0.499998 -0.5 -0.5 -0.500002" type="mesh" rgba="0.545098 0.52549 0.419608 1" mesh="link4"/>
+            <body name="link5" pos="0.0739989 0.0405003 0.0338995" quat="-0.452799 0.452799 0.543114 0.543114">
+              <inertial pos="-3.55003e-05 0.000825911 -0.0375847" quat="0.911516 0.411243 0.00302177 0.00303654" mass="0.403307" diaginertia="0.000219794 0.000195686 0.000169647"/>
+              <joint name="joint5" pos="0 0 0" axis="0 0 1" range="-1.38992 1.75167" actuatorfrcrange="-10 10"/>
+              <geom pos="0.0444816 -0.082679 -1.2615" quat="1 0 0 0" type="mesh" rgba="0.827451 0.623529 0.784314 1" mesh="link5"/>
+              <!-- 与 big_yam 同构，供 crank_4310 合并 -->
+              <body name="gripper_adapter" pos="0 -0.0085 -0.006" quat="0 1 0 0">
+                <inertial pos="0 0 0" mass="1e-9" diaginertia="1e-9 1e-9 1e-9"/>
+                <body name="link_6" pos="2.39858e-07 -0.0419481 0.0404996" quat="0.499998 -0.5 -0.5 -0.500002">
+                  <!-- 与 gripper/crank_4310/crank_4310.xml 中 link_6 一致；合并时该子树被夹爪侧替换，此处为单臂/预览时的末端惯量 -->
+                  <inertial pos="-5.10177e-05 -0.00269952 0.0581778" quat="0.98383 0.174699 0.0 0.0" mass="0.55366" diaginertia="0.000956992 0.000799286 0.000469547"/>
+                  <joint name="joint6" pos="0 0 0" axis="0 0 -1" range="-2.08973 2.09906" actuatorfrcrange="-10 10"/>
+                  <site name="tcp_site" pos="0 0 0" quat="1 0 0 1" size="0.005" rgba="1 0 0 1"/>
+                  <site name="grasp_site" pos="0 0 -0.1347" quat="1 0 0 1" size="0.005" rgba="0 1 0 1"/>
+                </body>
+              </body>
+            </body>
+          </body>
+        </body>
+      </body>
+    </body>
+  </worldbody>
+</mujoco>

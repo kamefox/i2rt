@@ -1,9 +1,20 @@
 import enum
 from abc import abstractmethod
-from typing import Any, Dict, Protocol, Union, runtime_checkable
+from dataclasses import dataclass
+from typing import Any, Dict, Optional, Protocol, Union, runtime_checkable
 
 import numpy as np
-from dm_env.specs import Array
+
+try:
+    from dm_env.specs import Array
+except ImportError:
+    @dataclass(frozen=True)
+    class Array:
+        """与 dm_env.specs.Array 构造参数兼容的占位，避免未安装 dm-env 时无法导入 Robot。"""
+
+        shape: Any
+        dtype: Any
+        name: Optional[str] = None
 
 ActionSpec = Union[Array, Dict[str, "ActionSpec"]]
 """Action specification for the agent/robot. It also includes the action space for the gripper."""
@@ -110,11 +121,3 @@ class Robot(Protocol):
     def get_robot_type(self) -> RobotType:
         """Get the robot type."""
         return RobotType.ARM
-
-    def reinit(self) -> None:
-        """Reinitialize the robot."""
-        pass
-
-    def close(self) -> None:
-        """Close the robot."""
-        pass
