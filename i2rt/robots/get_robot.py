@@ -36,11 +36,15 @@ _ARM_JOINT_LIMITS: dict[ArmType, np.ndarray] = {
     ArmType.YAM_ULTRA: np.array(
         [[-2.618, 3.054], [0.0, 3.65], [0.0, 3.142], [-1.571, 1.571], [-1.571, 1.571], [-2.094, 2.094]]
     ),
+    # yam_ultra_26: 与 yam 同构，仅 J4 电机换为 DM4340（关节范围与 yam 一致）
+    ArmType.YAM_ULTRA_26: np.array(
+        [[-2.618, 3.054], [0.0, 3.65], [0.0, 3.665], [-1.571, 1.571], [-1.571, 1.571], [-2.094, 2.094]]
+    ),
     ArmType.BIG_YAM: np.array(
         [[-2.618, 3.130], [0.0, 3.650], [0.0, 3.130], [-1.650, 1.650], [-1.571, 1.571], [-2.094, 2.094]]
     ),
-    # big_yamA: 关节范围与 big_yamA.xml 一致
-    ArmType.BIG_YAMA: np.array(
+    # big_yamZY: 关节范围与 big_yamZY.xml 一致
+    ArmType.BIG_YAMZY: np.array(
         [[-1.394, 4.278], [0.0, 3.142], [0.0, 3.126], [-1.46, 1.682], [-1.39, 1.752], [-2.09, 2.099]]
     ),
     ArmType.BIGGER_YAM: np.array(
@@ -59,7 +63,7 @@ class _ArmHWConfig:
     directions: tuple  # motor polarity (+1 / -1), one per arm joint
     kp: np.ndarray  # position gain, one per arm joint
     kd: np.ndarray  # damping gain,  one per arm joint
-    gravity_comp_factor: Union[float, np.ndarray]  # float 或 6 元组（自 big_yamA.json）
+    gravity_comp_factor: Union[float, np.ndarray]  # float 或 6 元组（自 big_yamZY.json）
 
 
 # YAM / YAM Pro / YAM Ultra: 3xDM4340 (shoulder) + 3xDM4310 (elbow/wrist)
@@ -69,6 +73,22 @@ _YAM_HW = _ArmHWConfig(
         (0x02, "DM4340"),
         (0x03, "DM4340"),
         (0x04, "DM4310"),
+        (0x05, "DM4310"),
+        (0x06, "DM4310"),
+    ),
+    directions=(1, 1, 1, 1, 1, 1),
+    kp=np.array([80.0, 80.0, 80.0, 40.0, 10.0, 10.0]),
+    kd=np.array([5.0, 5.0, 5.0, 1.5, 1.5, 1.5]),
+    gravity_comp_factor=1.3,
+)
+
+# yam_ultra_26: same as YAM but joint 4 uses DM4340 instead of DM4310 (higher torque, ±28 Nm).
+_YAM_ULTRA_26_HW = _ArmHWConfig(
+    motor_list=(
+        (0x01, "DM4340"),
+        (0x02, "DM4340"),
+        (0x03, "DM4340"),
+        (0x04, "DM4340"),
         (0x05, "DM4310"),
         (0x06, "DM4310"),
     ),
@@ -113,8 +133,8 @@ def _load_arm_json(name: str) -> _ArmHWConfig:
     )
 
 
-# big_yamA：自 i2rt/robots/config/big_yamA.json（stdlib，无需 PyYAML）
-_BIG_YAMA_HW = _load_arm_json("big_yamA")
+# big_yamZY：自 i2rt/robots/config/big_yamZY.json（stdlib，无需 PyYAML）
+_BIG_YAMZY_HW = _load_arm_json("big_yamZY")
 
 
 def _gravity_for_motor_robot(hw: _ArmHWConfig, with_gripper: bool) -> Union[float, np.ndarray]:
@@ -131,8 +151,9 @@ _ARM_HW_CONFIGS: dict[ArmType, _ArmHWConfig] = {
     ArmType.YAM: _YAM_HW,
     ArmType.YAM_PRO: _YAM_HW,
     ArmType.YAM_ULTRA: _YAM_HW,
+    ArmType.YAM_ULTRA_26: _YAM_ULTRA_26_HW,
     ArmType.BIG_YAM: _BIG_YAM_HW,
-    ArmType.BIG_YAMA: _BIG_YAMA_HW,
+    ArmType.BIG_YAMZY: _BIG_YAMZY_HW,
     ArmType.BIGGER_YAM: _BIG_YAM_HW,
 }
 

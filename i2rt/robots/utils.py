@@ -18,8 +18,9 @@ I2RT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ARM_YAM_XML_PATH = os.path.join(I2RT_ROOT, "robot_models/arm/yam/yam.xml")
 ARM_YAM_PRO_XML_PATH = os.path.join(I2RT_ROOT, "robot_models/arm/yam_pro/yam_pro.xml")
 ARM_YAM_ULTRA_XML_PATH = os.path.join(I2RT_ROOT, "robot_models/arm/yam_ultra/yam_ultra.xml")
+ARM_YAM_ULTRA_26_XML_PATH = os.path.join(I2RT_ROOT, "robot_models/arm/yam_ultra_26/yam_ultra_26.xml")
 ARM_BIG_YAM_XML_PATH = os.path.join(I2RT_ROOT, "robot_models/arm/big_yam/big_yam.xml")
-ARM_BIG_YAMA_XML_PATH = os.path.join(I2RT_ROOT, "robot_models/arm/big_yamA/big_yamA.xml")
+ARM_BIG_YAMZY_XML_PATH = os.path.join(I2RT_ROOT, "robot_models/arm/big_yamZY/big_yamZY.xml")
 ARM_BIGGER_YAM_XML_PATH = os.path.join(I2RT_ROOT, "robot_models/arm/bigger_yam/bigger_yam.xml")
 
 # Gripper XML paths
@@ -194,8 +195,9 @@ class ArmType(enum.Enum):
     YAM = "yam"
     YAM_PRO = "yam_pro"
     YAM_ULTRA = "yam_ultra"
+    YAM_ULTRA_26 = "yam_ultra_26"
     BIG_YAM = "big_yam"
-    BIG_YAMA = "big_yamA"
+    BIG_YAMZY = "big_yamZY"
     BIGGER_YAM = "bigger_yam"
 
     @classmethod
@@ -223,8 +225,9 @@ class ArmType(enum.Enum):
             ArmType.YAM: ARM_YAM_XML_PATH,
             ArmType.YAM_PRO: ARM_YAM_PRO_XML_PATH,
             ArmType.YAM_ULTRA: ARM_YAM_ULTRA_XML_PATH,
+            ArmType.YAM_ULTRA_26: ARM_YAM_ULTRA_26_XML_PATH,
             ArmType.BIG_YAM: ARM_BIG_YAM_XML_PATH,
-            ArmType.BIG_YAMA: ARM_BIG_YAMA_XML_PATH,
+            ArmType.BIG_YAMZY: ARM_BIG_YAMZY_XML_PATH,
             ArmType.BIGGER_YAM: ARM_BIGGER_YAM_XML_PATH,
         }
         if self not in _xml_map:

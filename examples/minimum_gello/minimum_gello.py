@@ -105,7 +105,7 @@ class YAMLeaderRobot:
 
 @dataclass
 class Args:
-    arm: Literal["yam", "yam_pro", "yam_ultra", "big_yam", "no_arm"] = "yam"
+    arm: Literal["yam", "yam_pro", "yam_ultra", "yam_ultra_26", "big_yam", "no_arm"] = "yam"
     gripper: Literal[
         "crank_4310", "linear_3507", "linear_4310", "flexible_4310", "yam_teaching_handle", "no_gripper"
     ] = "yam_teaching_handle"

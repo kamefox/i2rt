@@ -1,4 +1,4 @@
-<mujoco model="big_yamA">
+<mujoco model="big_yamZY">
   <compiler angle="radian" meshdir="assets"/>
   <size njmax="500" nconmax="100"/>
 

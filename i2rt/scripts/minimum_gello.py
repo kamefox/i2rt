@@ -128,7 +128,7 @@ class Args:
     server_port: int = DEFAULT_ROBOT_PORT
     can_channel: str = "can0"
     bilateral_kp: float = 0.0
-    arm_type: Literal["yam", "yam_pro", "yam_ultra", "big_yam", "big_yamA", "bigger_yam"] = "yam"
+    arm_type: Literal["yam", "yam_pro", "yam_ultra", "yam_ultra_26", "big_yam", "big_yamZY", "bigger_yam"] = "yam"
 
 
 def main(args: Args) -> None:

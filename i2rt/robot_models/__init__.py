@@ -6,6 +6,7 @@ _ROBOT_MODELS_ROOT = os.path.dirname(os.path.abspath(__file__))
 ARM_YAM_XML_PATH = os.path.join(_ROBOT_MODELS_ROOT, "arm/yam/yam.xml")
 ARM_YAM_PRO_XML_PATH = os.path.join(_ROBOT_MODELS_ROOT, "arm/yam_pro/yam_pro.xml")
 ARM_YAM_ULTRA_XML_PATH = os.path.join(_ROBOT_MODELS_ROOT, "arm/yam_ultra/yam_ultra.xml")
+ARM_YAM_ULTRA_26_XML_PATH = os.path.join(_ROBOT_MODELS_ROOT, "arm/yam_ultra_26/yam_ultra_26.xml")
 ARM_BIG_YAM_XML_PATH = os.path.join(_ROBOT_MODELS_ROOT, "arm/big_yam/big_yam.xml")
 
 # Gripper XML paths
